@@ -1,4 +1,6 @@
-node {
+pipeline {
+    agent any
+	 stages {
    stage('clone') {
        git credentialsId: '81ef6d50-6daf-4ab2-9c92-11190ca08b7f', 
        branch: 'main', url: 'https://github.com/bmimen/Jenkins.git'
@@ -13,7 +15,7 @@ node {
     
 '''
 }
-
+}
  post {
         failure {
             // Actions en cas d'échec des tests unitaires
@@ -26,4 +28,4 @@ node {
             echo "Les tests unitaires ont réussi sur le serveur A. La construction est prête pour la validation manuelle."
         }
     }
-	}
+	
