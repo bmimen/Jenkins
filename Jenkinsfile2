@@ -10,8 +10,8 @@ pipeline {
     stages {
         stage('Etape - Tests Unitaires') {
             steps {
-                // Déploiement dans l'environnement spécifié
-                // Exécution des tests unitaires
+                echo "Déploiement dans l'environnement spécifié"
+                 echo "Exécution des tests unitaires"
             }
         }
     }
@@ -38,8 +38,8 @@ pipeline {
     stages {
         stage('Etape - Tests d\'Acceptation') {
             steps {
-                // Déploiement dans l'environnement spécifié
-                // Exécution des tests d'acceptation
+               echo "Déploiement dans l'environnement spécifié"
+                 echo "Exécution des tests d acceptation"
             }
         }
     }
@@ -66,14 +66,14 @@ pipeline {
     stages {
         stage('Etape - Pré-Production') {
             steps {
-                // Déploiement dans l'environnement spécifié
-                // Tests spécifiques à la pré-production
+                echo "Déploiement dans l'environnement spécifié"
+                 echo "Exécution de la pré-production"
             }
         }
 
         stage('Production') {
             steps {
-                // Déploiement en production
+                   echo "Déploiement en production"
             }
         }
     }
