@@ -1,0 +1,89 @@
+pipeline {
+    agent any
+
+    environment {
+        ENVIRONMENT = 'development' // Changez cette valeur pour chaque environnement
+        DB_USER = 'dev_user'
+        DB_PASSWORD = 'dev_password'
+    }
+
+    stages {
+        stage('Etape - Tests Unitaires') {
+            steps {
+                // Déploiement dans l'environnement spécifié
+                // Exécution des tests unitaires
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo "Les tests unitaires ont échoué dans l'environnement ${ENVIRONMENT}. Veuillez vérifier les rapports de test."
+        }
+        success {
+            echo "Les tests unitaires ont réussi dans l'environnement ${ENVIRONMENT}. La construction est prête pour la validation manuelle."
+        }
+    }
+}
+
+pipeline {
+    agent any
+
+    environment {
+        ENVIRONMENT = 'integration' // Changez cette valeur pour chaque environnement
+        DB_USER = 'int_user'
+        DB_PASSWORD = 'int_password'
+    }
+
+    stages {
+        stage('Etape - Tests d\'Acceptation') {
+            steps {
+                // Déploiement dans l'environnement spécifié
+                // Exécution des tests d'acceptation
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo "Les tests d'acceptation ont échoué dans l'environnement ${ENVIRONMENT}. Veuillez vérifier les rapports de test."
+        }
+        success {
+            echo "Les tests d'acceptation ont réussi dans l'environnement ${ENVIRONMENT}. La validation manuelle pour l'environnement ${ENVIRONMENT} est prête."
+        }
+    }
+}
+
+pipeline {
+    agent any
+
+    environment {
+        ENVIRONMENT = 'pre-production' // Changez cette valeur pour chaque environnement
+        DB_USER = 'pp_user'
+        DB_PASSWORD = 'pp_password'
+    }
+
+    stages {
+        stage('Etape - Pré-Production') {
+            steps {
+                // Déploiement dans l'environnement spécifié
+                // Tests spécifiques à la pré-production
+            }
+        }
+
+        stage('Production') {
+            steps {
+                // Déploiement en production
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo "Échec dans l'environnement ${ENVIRONMENT} ou pendant le déploiement en production. Veuillez vérifier les rapports et logs."
+        }
+        success {
+            echo "Le déploiement en production dans l'environnement ${ENVIRONMENT} a réussi. Félicitations!"
+        }
+    }
+}
