@@ -2,19 +2,22 @@ pipeline {
     agent any
 	 stages {
    stage('clone') {
+	steps    {
        git credentialsId: '81ef6d50-6daf-4ab2-9c92-11190ca08b7f', 
        branch: 'main', url: 'https://github.com/bmimen/Jenkins.git'
-     }
+     }}
      stage('build') {
+	     steps    {
 	  bat '''javac Main.java
     
 '''
-     }
+     }   }
   stage('run') {
+ steps    {
   bat '''java Main
     
 '''
-}
+}}
 }
  post {
         failure {
