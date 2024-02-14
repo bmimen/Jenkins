@@ -1,20 +1,33 @@
+
+def stagesCommuns = [
+    'Configuration',
+    'Tests communs'
+]
+
+def stagesSpecifiquesA = [
+    'Etapes spécifiques pour A'
+]
+
+def stagesSpecifiquesB = [
+    'Etapes spécifiques pour B'
+]
+
+def stagesSpecifiquesC = [
+    'Etapes spécifiques pour C'
+]
+
 pipeline {
     agent any
 
-    
-    stages {
-        stage('Configuration') {
-            steps {
-                script {
-                    // Ajouter des étapes de configuration communes à tous les couloirs ici
-                }
-            }
-        }
+  
 
-        stage('Tests communs') {
-            steps {
-                script {
-                    // Ajouter des tests communs à tous les couloirs ici
+    stages {
+        script {
+            // Ajouter les étapes communes indépendamment du couloir choisi
+            for (stageName in stagesCommuns) {
+                stage(stageName) {
+                    echo "Exécution de l'étape commune: ${stageName}"
+                    // Ajouter des étapes communes ici
                 }
             }
         }
@@ -23,30 +36,18 @@ pipeline {
             // Ajouter les étapes spécifiques au couloir choisi
             switch(COULOIR) {
                 case 'A':
-                    stage('Etapes spécifiques pour A') {
-                        steps {
-                            script {
-                                // Ajouter des étapes spécifiques au couloir A ici
-                            }
-                        }
+                    for (stageName in stagesSpecifiquesA) {
+                        build(stageName)
                     }
                     break
                 case 'B':
-                    stage('Etapes spécifiques pour B') {
-                        steps {
-                            script {
-                                // Ajouter des étapes spécifiques au couloir B ici
-                            }
-                        }
+                    for (stageName in stagesSpecifiquesB) {
+                        build(stageName)
                     }
                     break
                 case 'C':
-                    stage('Etapes spécifiques pour C') {
-                        steps {
-                            script {
-                                // Ajouter des étapes spécifiques au couloir C ici
-                            }
-                        }
+                    for (stageName in stagesSpecifiquesC) {
+                        build(stageName)
                     }
                     break
                 default:
