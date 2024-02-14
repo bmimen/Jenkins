@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        COULOIR ="${params.COULOIR}"
-"${params.COULOIR}"
+        COULOIR =params.COULOIR
+
     }
 
     stages {
