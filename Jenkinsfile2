@@ -1,78 +1,59 @@
-def executeConfiguration() {
-    stage('Configuration') {
-        steps {
-            script {
-                echo "Exécution de l'étape de configuration"
-                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
-            }
-        }
-    }
-}
-
-def executeTestsCommuns() {
-    stage('Tests communs') {
-        steps {
-            script {
-                echo "Exécution de l'étape de tests communs"
-                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
-            }
-        }
-    }
-}
-
-def executeEtapesSpecifiquesPourA() {
-    stage('Etapes spécifiques pour A') {
-        steps {
-            script {
-                echo "Exécution des étapes spécifiques pour le couloir A"
-                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
-            }
-        }
-    }
-}
-
-def executeEtapesSpecifiquesPourB() {
-    stage('Etapes spécifiques pour B') {
-        steps {
-            script {
-                echo "Exécution des étapes spécifiques pour le couloir B"
-                // Ajouter des étapes spécifiques au couloir B ici si nécessaire
-            }
-        }
-    }
-}
-
-def executeEtapesSpecifiquesPourC() {
-    stage('Etapes spécifiques pour C') {
-        steps {
-            script {
-                echo "Exécution des étapes spécifiques pour le couloir C"
-                // Ajouter des étapes spécifiques au couloir C ici si nécessaire
-            }
-        }
-    }
-}
-
 pipeline {
     agent any
 
-  
+   
 
     stages {
-        executeConfiguration()
-        executeTestsCommuns()
+        stage('Configuration') {
+            steps {
+                script {
+                    echo "Exécution de l'étape de configuration"
+                    // Ajouter des étapes spécifiques au couloir A ici si nécessaire
+                }
+            }
+        }
+
+        stage('Tests communs') {
+            steps {
+                script {
+                    echo "Exécution de l'étape de tests communs"
+                    // Ajouter des étapes spécifiques au couloir A ici si nécessaire
+                }
+            }
+        }
 
         script {
             // Ajouter les étapes spécifiques au couloir choisi
             switch(COULOIR) {
                 case 'A':
-                    executeEtapesSpecifiquesPourA()
+                    stage('Etapes spécifiques pour A') {
+                        steps {
+                            script {
+                                echo "Exécution des étapes spécifiques pour le couloir A"
+                                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
+                            }
+                        }
+                    }
                     break
                 case 'B':
-                    executeEtapesSpecifiquesPourB()
+                    stage('Etapes spécifiques pour B') {
+                        steps {
+                            script {
+                                echo "Exécution des étapes spécifiques pour le couloir B"
+                                // Ajouter des étapes spécifiques au couloir B ici si nécessaire
+                            }
+                        }
+                    }
                     break
                 case 'C':
-                    executeEtapesSpecifiquesPourC()
+                    stage('Etapes spécifiques pour C') {
+                        steps {
+                            script {
+                                echo "Exécution des étapes spécifiques pour le couloir C"
+                                // Ajouter des étapes spécifiques au couloir C ici si nécessaire
+                            }
+                        }
+                    }
                     break
                 default:
                     error "Couloir inconnu: ${COULOIR}"
