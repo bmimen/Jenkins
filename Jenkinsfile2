@@ -1,64 +1,52 @@
 pipeline {
     agent any
 
-   
-
+    
     stages {
         stage('Configuration') {
             steps {
-                script {
-                    echo "Exécution de l'étape de configuration"
-                    // Ajouter des étapes spécifiques au couloir A ici si nécessaire
-                }
+                echo "Exécution de l'étape de configuration"
+                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
             }
         }
 
         stage('Tests communs') {
             steps {
-                script {
-                    echo "Exécution de l'étape de tests communs"
-                    // Ajouter des étapes spécifiques au couloir A ici si nécessaire
-                }
+                echo "Exécution de l'étape de tests communs"
+                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
             }
         }
 
- 
-            switch(COULOIR) {
-                case 'A':
-                    stage('Etapes spécifiques pour A') {
-                        steps {
-                            script {
-                                echo "Exécution des étapes spécifiques pour le couloir A"
-                                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
-                            }
-                        }
-                    }
-                    break
-                case 'B':
-                    stage('Etapes spécifiques pour B') {
-                        steps {
-                            script {
-                                echo "Exécution des étapes spécifiques pour le couloir B"
-                                // Ajouter des étapes spécifiques au couloir B ici si nécessaire
-                            }
-                        }
-                    }
-                    break
-                case 'C':
-                    stage('Etapes spécifiques pour C') {
-                        steps {
-                            script {
-                                echo "Exécution des étapes spécifiques pour le couloir C"
-                                // Ajouter des étapes spécifiques au couloir C ici si nécessaire
-                            }
-                        }
-                    }
-                    break
-                default:
-                    error "Couloir inconnu: ${COULOIR}"
+        stage('Etapes spécifiques pour A') {
+            when {
+                expression { COULOIR == 'A' }
+            }
+            steps {
+                echo "Exécution des étapes spécifiques pour le couloir A"
+                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
             }
         }
-    
+
+        stage('Etapes spécifiques pour B') {
+            when {
+                expression { COULOIR == 'B' }
+            }
+            steps {
+                echo "Exécution des étapes spécifiques pour le couloir B"
+                // Ajouter des étapes spécifiques au couloir B ici si nécessaire
+            }
+        }
+
+        stage('Etapes spécifiques pour C') {
+            when {
+                expression { COULOIR == 'C' }
+            }
+            steps {
+                echo "Exécution des étapes spécifiques pour le couloir C"
+                // Ajouter des étapes spécifiques au couloir C ici si nécessaire
+            }
+        }
+    }
 
     post {
         failure {
