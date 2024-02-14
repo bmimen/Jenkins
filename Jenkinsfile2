@@ -37,6 +37,10 @@ stage("Etape spécifique pour COULOIR") {
     
 
 }
+ }
+    
+
+}
     post {
         failure
         {
@@ -48,5 +52,5 @@ stage("Etape spécifique pour COULOIR") {
         }
     }
  }
-    }
+  
 
