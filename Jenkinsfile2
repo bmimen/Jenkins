@@ -1,23 +1,9 @@
 pipeline {
     agent any   
-stages {
-        stage('Configuration') {
+ stages {
+stage("Etape spécifique pour COULOIR") {
             steps {
                 script {
-                    echo "Vous pouvez ajouter des étapes de configuration communes à tous les couloirs ici" 
-                }
-            }
-        }
-
-        stage('Tests communs') {
-            steps {
-                script {
-                    echo "Vous pouvez ajouter des tests communs à tous les couloirs ici" 
-                }
-            }
-        }
-
-script {
             // Définir les stages spécifiques à chaque couloir
             switch(COULOIR) {
                 case '031':
