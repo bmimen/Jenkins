@@ -8,8 +8,8 @@ pipeline {
     stages {
         stage('Couloir ${COULOIR} - Tests') {
             steps {
-                // Déploiement dans le couloir spécifié
-                // Exécution des tests
+                echo " Déploiement dans le couloir spécifié"
+              echo "Exécution des tests"
             }
         }
     }
