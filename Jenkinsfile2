@@ -1,65 +1,53 @@
-def configuration() {
-    script {
-        stage('Configuration') {
-            // Ajouter des étapes de configuration communes à tous les couloirs ici
-        }
-    }
-}
-
-def testsCommuns() {
-    script {
-        stage('Tests communs') {
-            // Ajouter des tests communs à tous les couloirs ici
-        }
-    }
-}
-
-def etapesSpecifiquesPourA() {
-    script {
-        stage('Etapes spécifiques pour A') {
-            // Ajouter des étapes spécifiques au couloir A ici
-        }
-    }
-}
-
-def etapesSpecifiquesPourB() {
-    script {
-        stage('Etapes spécifiques pour B') {
-            // Ajouter des étapes spécifiques au couloir B ici
-        }
-    }
-}
-
-def etapesSpecifiquesPourC() {
-    script {
-        stage('Etapes spécifiques pour C') {
-            // Ajouter des étapes spécifiques au couloir C ici
-        }
-    }
-}
-
 pipeline {
     agent any
 
     
     stages {
-        script {
-            // Ajouter les étapes communes indépendamment du couloir choisi
-            configuration()
-            testsCommuns()
+        stage('Configuration') {
+            steps {
+                script {
+                    // Ajouter des étapes de configuration communes à tous les couloirs ici
+                }
+            }
+        }
+
+        stage('Tests communs') {
+            steps {
+                script {
+                    // Ajouter des tests communs à tous les couloirs ici
+                }
+            }
         }
 
         script {
             // Ajouter les étapes spécifiques au couloir choisi
             switch(COULOIR) {
                 case 'A':
-                    etapesSpecifiquesPourA()
+                    stage('Etapes spécifiques pour A') {
+                        steps {
+                            script {
+                                // Ajouter des étapes spécifiques au couloir A ici
+                            }
+                        }
+                    }
                     break
                 case 'B':
-                    etapesSpecifiquesPourB()
+                    stage('Etapes spécifiques pour B') {
+                        steps {
+                            script {
+                                // Ajouter des étapes spécifiques au couloir B ici
+                            }
+                        }
+                    }
                     break
                 case 'C':
-                    etapesSpecifiquesPourC()
+                    stage('Etapes spécifiques pour C') {
+                        steps {
+                            script {
+                                // Ajouter des étapes spécifiques au couloir C ici
+                            }
+                        }
+                    }
                     break
                 default:
                     error "Couloir inconnu: ${COULOIR}"
