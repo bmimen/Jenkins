@@ -47,5 +47,6 @@ stage("Etape spécifique pour COULOIR") {
             echo "Les tests ont réussi dans le couloir ${COULOIR}. La construction est prête pour la validation manuelle."
         }
     }
-
+ }
+    }
 
