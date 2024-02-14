@@ -22,8 +22,7 @@ pipeline {
             }
         }
 
-        script {
-            // Ajouter les étapes spécifiques au couloir choisi
+ 
             switch(COULOIR) {
                 case 'A':
                     stage('Etapes spécifiques pour A') {
@@ -59,7 +58,7 @@ pipeline {
                     error "Couloir inconnu: ${COULOIR}"
             }
         }
-    }
+    
 
     post {
         failure {
