@@ -1,10 +1,7 @@
 pipeline {
     agent any
 
-    environment {
-        COULOIR ='params.COULOIR'
 
-    }
 
     stages {
         stage('Couloir ${COULOIR} - Tests') {
