@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        COULOIR =params.COULOIR
+        COULOIR ='params.COULOIR'
 
     }
 
