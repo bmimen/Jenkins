@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        COULOIR = '031' // Changez cette valeur pour chaque couloir (A, B, C)
+        COULOIR ="${params.COULOIR}"
+"${params.COULOIR}"
     }
 
     stages {
