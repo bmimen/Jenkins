@@ -7,27 +7,27 @@ stage("Etape spécifique pour COULOIR") {
           
             switch(COULOIR) {
                 case '031':
-                    stage('Etape A - Déploiement et Tests') {
+                   
                         steps {
                             echo " Déploiement dans le couloir 031"
                             echo "Exécution des tests"
                         }
-                    }
+                 
                     break
                 case '021':
-                    stage('Etape B - Déploiement et Tests') {
+                 
                           steps {
                             echo " Déploiement dans le couloir 021"
                             echo "Exécution des tests"
-                        }
+                       
                     }
                     break
                 case '011':
-                    stage('Etape C - Déploiement et Tests') {
+                
                         steps {
                             echo " Déploiement dans le couloir 011"
                             echo "Exécution des tests"
-                        }
+                       
                     }
                     break
                 default:
