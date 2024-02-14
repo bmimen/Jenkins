@@ -1,9 +1,53 @@
-def executeStages(stages) {
-    for (stageName in stages) {
-        stage(stageName) {
-            steps {
-                echo "Exécution de l'étape : ${stageName}"
-                // Ajouter des étapes spécifiques ici si nécessaire
+def executeConfiguration() {
+    stage('Configuration') {
+        steps {
+            script {
+                echo "Exécution de l'étape de configuration"
+                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
+            }
+        }
+    }
+}
+
+def executeTestsCommuns() {
+    stage('Tests communs') {
+        steps {
+            script {
+                echo "Exécution de l'étape de tests communs"
+                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
+            }
+        }
+    }
+}
+
+def executeEtapesSpecifiquesPourA() {
+    stage('Etapes spécifiques pour A') {
+        steps {
+            script {
+                echo "Exécution des étapes spécifiques pour le couloir A"
+                // Ajouter des étapes spécifiques au couloir A ici si nécessaire
+            }
+        }
+    }
+}
+
+def executeEtapesSpecifiquesPourB() {
+    stage('Etapes spécifiques pour B') {
+        steps {
+            script {
+                echo "Exécution des étapes spécifiques pour le couloir B"
+                // Ajouter des étapes spécifiques au couloir B ici si nécessaire
+            }
+        }
+    }
+}
+
+def executeEtapesSpecifiquesPourC() {
+    stage('Etapes spécifiques pour C') {
+        steps {
+            script {
+                echo "Exécution des étapes spécifiques pour le couloir C"
+                // Ajouter des étapes spécifiques au couloir C ici si nécessaire
             }
         }
     }
@@ -12,33 +56,23 @@ def executeStages(stages) {
 pipeline {
     agent any
 
-    
+  
+
     stages {
-        script {
-            // Ajouter les étapes communes indépendamment du couloir choisi
-            executeStages([
-                'Configuration',
-                'Tests communs'
-            ])
-        }
+        executeConfiguration()
+        executeTestsCommuns()
 
         script {
             // Ajouter les étapes spécifiques au couloir choisi
             switch(COULOIR) {
                 case 'A':
-                    executeStages([
-                        'Etapes spécifiques pour A'
-                    ])
+                    executeEtapesSpecifiquesPourA()
                     break
                 case 'B':
-                    executeStages([
-                        'Etapes spécifiques pour B'
-                    ])
+                    executeEtapesSpecifiquesPourB()
                     break
                 case 'C':
-                    executeStages([
-                        'Etapes spécifiques pour C'
-                    ])
+                    executeEtapesSpecifiquesPourC()
                     break
                 default:
                     error "Couloir inconnu: ${COULOIR}"
