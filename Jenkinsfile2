@@ -1,25 +1,10 @@
-def stagesCommuns = [
-    'Configuration',
-    'Tests communs'
-]
-
-def stagesSpecifiquesA = [
-    'Etapes spécifiques pour A'
-]
-
-def stagesSpecifiquesB = [
-    'Etapes spécifiques pour B'
-]
-
-def stagesSpecifiquesC = [
-    'Etapes spécifiques pour C'
-]
-
 def executeStages(stages) {
     for (stageName in stages) {
         stage(stageName) {
-            echo "Exécution de l'étape : ${stageName}"
-            // Ajouter des étapes spécifiques ici si nécessaire
+            steps {
+                echo "Exécution de l'étape : ${stageName}"
+                // Ajouter des étapes spécifiques ici si nécessaire
+            }
         }
     }
 }
@@ -28,24 +13,32 @@ pipeline {
     agent any
 
     
-
     stages {
         script {
             // Ajouter les étapes communes indépendamment du couloir choisi
-            executeStages(stagesCommuns)
+            executeStages([
+                'Configuration',
+                'Tests communs'
+            ])
         }
 
         script {
             // Ajouter les étapes spécifiques au couloir choisi
             switch(COULOIR) {
                 case 'A':
-                    executeStages(stagesSpecifiquesA)
+                    executeStages([
+                        'Etapes spécifiques pour A'
+                    ])
                     break
                 case 'B':
-                    executeStages(stagesSpecifiquesB)
+                    executeStages([
+                        'Etapes spécifiques pour B'
+                    ])
                     break
                 case 'C':
-                    executeStages(stagesSpecifiquesC)
+                    executeStages([
+                        'Etapes spécifiques pour C'
+                    ])
                     break
                 default:
                     error "Couloir inconnu: ${COULOIR}"
