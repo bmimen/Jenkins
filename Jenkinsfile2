@@ -1,10 +1,5 @@
 pipeline {
-    agent any
-
-
-
-    stages {
-       
+    agent any   
 script {
             // Définir les stages spécifiques à chaque couloir
             switch(COULOIR) {
@@ -36,7 +31,7 @@ script {
                     error "Couloir inconnu: ${COULOIR}"
             }
         }
-    }
+    
 
 
     post {
