@@ -41,10 +41,7 @@ def etapesSpecifiquesPourC() {
 pipeline {
     agent any
 
-    environment {
-        COULOIR = params.COULOIR
-    }
-
+    
     stages {
         script {
             // Ajouter les étapes communes indépendamment du couloir choisi
