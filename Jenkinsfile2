@@ -4,7 +4,7 @@ pipeline {
 stage("Etape spécifique pour COULOIR") {
             steps {
                 script {
-            // Définir les stages spécifiques à chaque couloir
+          
             switch(COULOIR) {
                 case '031':
                     stage('Etape A - Déploiement et Tests') {
