@@ -1,56 +1,88 @@
+def configuration() {
+    stage('Configuration') {
+        steps {
+            script {
+                // Ajouter des étapes de configuration communes à tous les couloirs ici
+            }
+        }
+    }
+}
+
+def testsCommuns() {
+    stage('Tests communs') {
+        steps {
+            script {
+                // Ajouter des tests communs à tous les couloirs ici
+            }
+        }
+    }
+}
+
+def etapesSpecifiquesPourA() {
+    stage('Etapes spécifiques pour A') {
+        steps {
+            script {
+                // Ajouter des étapes spécifiques au couloir A ici
+            }
+        }
+    }
+}
+
+def etapesSpecifiquesPourB() {
+    stage('Etapes spécifiques pour B') {
+        steps {
+            script {
+                // Ajouter des étapes spécifiques au couloir B ici
+            }
+        }
+    }
+}
+
+def etapesSpecifiquesPourC() {
+    stage('Etapes spécifiques pour C') {
+        steps {
+            script {
+                // Ajouter des étapes spécifiques au couloir C ici
+            }
+        }
+    }
+}
+
 pipeline {
-    agent any   
- stages {
-stage("Etape spécifique pour COULOIR") {
-            steps {
-                script {
-          
+    agent any
+
+    environment {
+        COULOIR = params.COULOIR
+    }
+
+    stages {
+        configuration()
+        testsCommuns()
+
+        script {
+            // Ajouter les étapes spécifiques au couloir choisi
             switch(COULOIR) {
-                case '031':
-                   
-                        steps {
-                            echo " Déploiement dans le couloir 031"
-                            echo "Exécution des tests"
-                        }
-                 
+                case 'A':
+                    etapesSpecifiquesPourA()
                     break
-                case '021':
-                 
-                          steps {
-                            echo " Déploiement dans le couloir 021"
-                            echo "Exécution des tests"
-                       
-                    }
+                case 'B':
+                    etapesSpecifiquesPourB()
                     break
-                case '011':
-                
-                        steps {
-                            echo " Déploiement dans le couloir 011"
-                            echo "Exécution des tests"
-                       
-                    }
+                case 'C':
+                    etapesSpecifiquesPourC()
                     break
                 default:
                     error "Couloir inconnu: ${COULOIR}"
             }
         }
-    
+    }
 
-}
- }
-    
-
-}
     post {
-        failure
-        {
+        failure {
             echo "Échec dans le couloir ${COULOIR}. Veuillez vérifier les rapports et logs."
         }
-        success
-        {
+        success {
             echo "Les tests ont réussi dans le couloir ${COULOIR}. La construction est prête pour la validation manuelle."
         }
     }
- }
-  
-
+}
