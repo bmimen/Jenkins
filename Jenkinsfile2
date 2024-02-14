@@ -1,49 +1,39 @@
 def configuration() {
-    stage('Configuration') {
-        steps {
-            script {
-                // Ajouter des étapes de configuration communes à tous les couloirs ici
-            }
+    script {
+        stage('Configuration') {
+            // Ajouter des étapes de configuration communes à tous les couloirs ici
         }
     }
 }
 
 def testsCommuns() {
-    stage('Tests communs') {
-        steps {
-            script {
-                // Ajouter des tests communs à tous les couloirs ici
-            }
+    script {
+        stage('Tests communs') {
+            // Ajouter des tests communs à tous les couloirs ici
         }
     }
 }
 
 def etapesSpecifiquesPourA() {
-    stage('Etapes spécifiques pour A') {
-        steps {
-            script {
-                // Ajouter des étapes spécifiques au couloir A ici
-            }
+    script {
+        stage('Etapes spécifiques pour A') {
+            // Ajouter des étapes spécifiques au couloir A ici
         }
     }
 }
 
 def etapesSpecifiquesPourB() {
-    stage('Etapes spécifiques pour B') {
-        steps {
-            script {
-                // Ajouter des étapes spécifiques au couloir B ici
-            }
+    script {
+        stage('Etapes spécifiques pour B') {
+            // Ajouter des étapes spécifiques au couloir B ici
         }
     }
 }
 
 def etapesSpecifiquesPourC() {
-    stage('Etapes spécifiques pour C') {
-        steps {
-            script {
-                // Ajouter des étapes spécifiques au couloir C ici
-            }
+    script {
+        stage('Etapes spécifiques pour C') {
+            // Ajouter des étapes spécifiques au couloir C ici
         }
     }
 }
@@ -51,11 +41,16 @@ def etapesSpecifiquesPourC() {
 pipeline {
     agent any
 
-   
+    environment {
+        COULOIR = params.COULOIR
+    }
 
     stages {
-        configuration()
-        testsCommuns()
+        script {
+            // Ajouter les étapes communes indépendamment du couloir choisi
+            configuration()
+            testsCommuns()
+        }
 
         script {
             // Ajouter les étapes spécifiques au couloir choisi
