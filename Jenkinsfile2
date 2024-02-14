@@ -51,9 +51,7 @@ def etapesSpecifiquesPourC() {
 pipeline {
     agent any
 
-    environment {
-        COULOIR = params.COULOIR
-    }
+   
 
     stages {
         configuration()
