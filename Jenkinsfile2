@@ -1,5 +1,22 @@
 pipeline {
     agent any   
+stages {
+        stage('Configuration') {
+            steps {
+                script {
+                    echo "Vous pouvez ajouter des étapes de configuration communes à tous les couloirs ici" 
+                }
+            }
+        }
+
+        stage('Tests communs') {
+            steps {
+                script {
+                    echo "Vous pouvez ajouter des tests communs à tous les couloirs ici" 
+                }
+            }
+        }
+
 script {
             // Définir les stages spécifiques à chaque couloir
             switch(COULOIR) {
@@ -33,7 +50,7 @@ script {
         }
     
 
-
+}
     post {
         failure
         {
