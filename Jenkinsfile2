@@ -17,9 +17,9 @@ pipeline {
             }
         }
 
-        stage('Etapes spécifiques pour A') {
+        stage('Etapes spécifiques pour 031') {
             when {
-                expression { COULOIR == 'A' }
+                expression { COULOIR == '031' }
             }
             steps {
                 echo "Exécution des étapes spécifiques pour le couloir A"
@@ -27,9 +27,9 @@ pipeline {
             }
         }
 
-        stage('Etapes spécifiques pour B') {
+        stage('Etapes spécifiques pour 021') {
             when {
-                expression { COULOIR == 'B' }
+                expression { COULOIR == '021' }
             }
             steps {
                 echo "Exécution des étapes spécifiques pour le couloir B"
@@ -37,9 +37,9 @@ pipeline {
             }
         }
 
-        stage('Etapes spécifiques pour C') {
+        stage('Etapes spécifiques pour 011') {
             when {
-                expression { COULOIR == 'C' }
+                expression { COULOIR == '011' }
             }
             steps {
                 echo "Exécution des étapes spécifiques pour le couloir C"
